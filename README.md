@@ -2,8 +2,6 @@
 
 umi-serve is a cli tool for umi mock data
 
-[![npm version](https://badge.fury.io/js/umi-serve.svg)](http://badge.fury.io/js/umi-serve)
-
 ## Install
 
     $ [sudo]npm install -g umi-serve-cli
