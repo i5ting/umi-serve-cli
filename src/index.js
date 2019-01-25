@@ -18,8 +18,12 @@ const api = new PluginAPI('mock-data', service);
 
 const app = express();
 
-// respond to all requests
+// respond with mockMiddleware
 app.use(mockMiddleware(api, []));
 
 //create node.js http server and listen on port
-http.createServer(app).listen(3000);
+const server = http.createServer(app).listen(3000, () => {
+    const host = server.address().address;
+    const port = server.address().port;
+    console.log('umi mock serve at http://%s:%s', host, port);
+});

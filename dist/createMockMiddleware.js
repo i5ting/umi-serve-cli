@@ -243,7 +243,7 @@ function getMockMiddleware(api, errors) {
     const match = matchMock(req);
 
     if (match) {
-      console.log(`mock matched: [${match.method}] ${match.path}`);
+      console.log(`mock matched: [${req.method}] ${req.path}`);
       return match.handler(req, res, next);
     } else {
       console.error(`mock failed:  [${req.method}] ${req.url}`);

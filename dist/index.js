@@ -23,4 +23,8 @@ const app = (0, _express.default)(); // respond to all requests
 
 app.use((0, _createMockMiddleware.default)(api, [])); //create node.js http server and listen on port
 
-_http.default.createServer(app).listen(3000);
+const server = _http.default.createServer(app).listen(3000, () => {
+  const host = server.address().address;
+  const port = server.address().port;
+  console.log('umi mock serve at http://%s:%s', host, port);
+});
