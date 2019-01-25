@@ -43,7 +43,7 @@ function getMockMiddleware(api, errors) {
     cwd,
     absPagesPath
   } = paths;
-  const absMockPath = (0, _path.join)(cwd, 'mock');
+  const absMockPath = (0, _path.join)(cwd, process.env.MOCK_DIR ? process.env.MOCK_DIR : 'mock');
   const absConfigPath = (0, _path.join)(cwd, '.umirc.mock.js');
   api.addBabelRegister([absMockPath, absConfigPath, absPagesPath]);
   let mockData = getConfig();
@@ -76,6 +76,8 @@ function getMockMiddleware(api, errors) {
       (0, _debug.default)(`load mock data from ${absConfigPath}`);
       ret = require(absConfigPath); // eslint-disable-line
     } else {
+      console.log(`absMockPath=${absMockPath}`);
+
       const mockFiles = _glob.default.sync('**/*.js', {
         cwd: absMockPath
       }).map(p => (0, _path.join)(absMockPath, p)).concat(_glob.default.sync('**/_mock.js', {

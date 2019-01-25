@@ -17,7 +17,7 @@ const BODY_PARSED_METHODS = ['post', 'put', 'patch', 'delete'];
 export default function getMockMiddleware(api, errors) {
   const { paths } = api.service;
   const { cwd, absPagesPath } = paths;
-  const absMockPath = join(cwd, 'mock');
+  const absMockPath = join(cwd, process.env.MOCK_DIR ? process.env.MOCK_DIR : 'mock');
   const absConfigPath = join(cwd, '.umirc.mock.js');
   api.addBabelRegister([absMockPath, absConfigPath, absPagesPath]);
 
@@ -51,6 +51,7 @@ export default function getMockMiddleware(api, errors) {
       debug(`load mock data from ${absConfigPath}`);
       ret = require(absConfigPath); // eslint-disable-line
     } else {
+      console.log(`absMockPath=${absMockPath}`)
       const mockFiles = glob
         .sync('**/*.js', {
           cwd: absMockPath,

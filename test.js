@@ -1,8 +1,14 @@
-var assert = require('assert');
-describe('Array', function() {
-  describe('#indexOf()', function() {
-    it('should return -1 when the value is not present', function() {
-      assert.equal([1,2,3].indexOf(4), -1);
+import request from 'supertest' 
+import app from './src/app' 
+
+describe('GET /api/users', function() {
+    this.timeout(5000);
+    it('responds with json', function(done) {
+        process.env.MOCK_DIR = 'example/mock'
+        request(app())
+            .get('/api/users')
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+            .expect(200, done)
     });
-  });
 });
